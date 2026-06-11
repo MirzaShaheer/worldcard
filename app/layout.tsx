@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Anton, Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import { SITE } from "@/lib/config";
+import { SITE, BASE_PATH } from "@/lib/config";
 
 const anton = Anton({
   weight: "400",
@@ -31,16 +31,16 @@ export const metadata: Metadata = {
     description: SITE.tagline,
     url: SITE.url,
     siteName: SITE.name,
-    images: [{ url: "/logo.png", width: 1200, height: 630, alt: SITE.name }],
+    images: [{ url: `${BASE_PATH}/logo.png`, width: 1200, height: 630, alt: SITE.name }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE.name} — ${SITE.ticker}`,
     description: SITE.tagline,
-    images: ["/logo.png"],
+    images: [`${BASE_PATH}/logo.png`],
   },
-  icons: { icon: "/favicon.ico" },
+  icons: { icon: `${BASE_PATH}/favicon.ico` },
 };
 
 export const viewport: Viewport = {

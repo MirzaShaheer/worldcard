@@ -5,6 +5,13 @@
    of truth for the token, links, and headline copy.
    ========================================================================= */
 
+/**
+ * Base path the site is served under. Empty locally; set to "/worldcard" by the
+ * GitHub Pages deploy workflow (NEXT_PUBLIC_BASE_PATH). Prefix any same-origin
+ * asset referenced via a raw <img>/url with this so it resolves under the subpath.
+ */
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export const SITE = {
   name: "World Card",
   ticker: "$WORLDCARD",

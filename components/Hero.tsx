@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { SITE, TOKEN } from "@/lib/config";
+import { SITE, TOKEN, BASE_PATH } from "@/lib/config";
 import { TEAMS } from "@/lib/teams";
 import { TradingCard } from "@/components/TradingCard";
 
@@ -85,7 +85,7 @@ export function Hero() {
             {logoShown && (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                src="/logo.png"
+                src={`${BASE_PATH}/logo.png`}
                 alt={`${SITE.name} logo`}
                 onError={() => setLogoShown(false)}
                 className="glow-gold h-9 w-9 rounded-full border border-gold/40 object-cover"
