@@ -1,28 +1,25 @@
 import type { NextConfig } from "next";
 
 /**
- * Dual-target config.
+ * The site builds to a static export (`out/`) for BOTH hosts; the only
+ * difference is the base path:
  *
- * GitHub Pages (CI sets NEXT_PUBLIC_BASE_PATH=/worldcard):
- *   → static export to `out/`, served under the /worldcard subpath, with
- *     trailingSlash so /cards/ resolves to cards/index.html.
+ *   GitHub Pages — CI sets NEXT_PUBLIC_BASE_PATH=/worldcard → export is served
+ *                  under the /worldcard subpath.
+ *   Vercel/local — NEXT_PUBLIC_BASE_PATH unset → export served at the root.
+ *                  vercel.json pins Vercel to serve the `out/` directory.
  *
- * Vercel & local dev (NEXT_PUBLIC_BASE_PATH unset):
- *   → a normal Next.js build served at the root domain. We do NOT force
- *     `output: "export"` here, because Vercel runs Next natively and a static
- *     export confuses its routing (causing 404 NOT_FOUND).
- *
- * The Pages-only env var is the single switch that selects the target.
+ * `trailingSlash` makes /cards resolve to cards/index.html on a static host.
+ * `images.unoptimized` keeps the export self-contained (no image optimizer;
+ * the site uses plain <img> for flags/logo anyway).
  */
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-const isPagesExport = basePath !== "";
 
 const nextConfig: NextConfig = {
-  // Harmless when next/image is unused; required for a self-contained export.
+  output: "export",
+  trailingSlash: true,
   images: { unoptimized: true },
-  ...(isPagesExport
-    ? { output: "export", trailingSlash: true, basePath }
-    : {}),
+  ...(basePath ? { basePath } : {}),
 };
 
 export default nextConfig;
