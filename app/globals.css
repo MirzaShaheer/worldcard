@@ -1,26 +1,181 @@
 @import "tailwindcss";
 
+/* =========================================================================
+   WORLD CARD — design system
+   A blend of World Cup (trophy gold, pitch green, night-stadium navy) and
+   Pokémon TCG (holo foil, rarity gems, energy glow).
+   Tailwind v4: theme tokens live in @theme; complex effects are plain CSS.
+   ========================================================================= */
+
+@theme {
+  /* core surfaces */
+  --color-night: #05070f;
+  --color-night-2: #080c18;
+  --color-surface: #0b1124;
+  --color-surface-2: #111a33;
+  --color-line: #1d2748;
+
+  /* brand */
+  --color-gold: #ffd24a;
+  --color-gold-deep: #c08a2a;
+  --color-pitch: #1ec873;
+  --color-pitch-deep: #0a6b3d;
+  --color-electric: #38e1ff;
+  --color-crimson: #ff4d5e;
+
+  /* rarity tiers */
+  --color-legendary: #ffcf4d;
+  --color-epic: #b06bff;
+  --color-rare: #4ea8ff;
+  --color-common: #7bd88f;
+
+  /* fonts (wired to next/font CSS variables in layout.tsx) */
+  --font-display: var(--font-anton);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-grotesk);
+
+  /* motion */
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 3.2s linear infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--color-night);
+  --foreground: #eaf0ff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+@keyframes shimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1; }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
+
+/* ---- typographic helpers ------------------------------------------------ */
+.font-display { font-family: var(--font-display), Impact, sans-serif; }
+.tracking-mega { letter-spacing: 0.06em; }
+
+/* =========================================================================
+   Backgrounds & atmosphere
+   ========================================================================= */
+
+/* hexagon football-panel mesh */
+.hex-bg {
+  background-color: var(--color-night);
+  background-image:
+    linear-gradient(30deg, rgba(255,255,255,0.025) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.025) 87.5%, rgba(255,255,255,0.025)),
+    linear-gradient(150deg, rgba(255,255,255,0.025) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.025) 87.5%, rgba(255,255,255,0.025)),
+    linear-gradient(30deg, rgba(255,255,255,0.025) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.025) 87.5%, rgba(255,255,255,0.025)),
+    linear-gradient(150deg, rgba(255,255,255,0.025) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.025) 87.5%, rgba(255,255,255,0.025));
+  background-size: 56px 98px;
+  background-position: 0 0, 0 0, 28px 49px, 28px 49px;
+}
+
+/* stadium floodlight wash */
+.stadium-glow {
+  background:
+    radial-gradient(60% 50% at 50% -10%, rgba(56,225,255,0.18), transparent 70%),
+    radial-gradient(40% 40% at 12% 8%, rgba(255,210,74,0.14), transparent 70%),
+    radial-gradient(45% 45% at 88% 12%, rgba(30,200,115,0.14), transparent 70%);
+}
+
+.pitch-lines {
+  background-image:
+    linear-gradient(transparent 0, transparent calc(100% - 1px), rgba(30,200,115,0.10) 100%),
+    linear-gradient(90deg, transparent 0, transparent calc(100% - 1px), rgba(30,200,115,0.06) 100%);
+  background-size: 100% 64px, 64px 100%;
+}
+
+/* =========================================================================
+   Holographic / foil effects (rarity-driven)
+   ========================================================================= */
+
+.holo-rainbow {
+  background: linear-gradient(
+    115deg,
+    rgba(255,0,128,0.35), rgba(255,210,74,0.35), rgba(56,225,255,0.35),
+    rgba(124,216,143,0.35), rgba(176,107,255,0.35), rgba(255,0,128,0.35)
+  );
+  background-size: 200% 200%;
+  animation: var(--animate-shimmer);
+  mix-blend-mode: color-dodge;
+}
+.holo-gold {
+  background: linear-gradient(115deg, rgba(255,210,74,0.0), rgba(255,210,74,0.45), rgba(255,255,255,0.5), rgba(192,138,42,0.2), rgba(255,210,74,0.0));
+  background-size: 200% 200%;
+  animation: var(--animate-shimmer);
+  mix-blend-mode: soft-light;
+}
+.holo-silver {
+  background: linear-gradient(115deg, rgba(78,168,255,0.0), rgba(200,220,255,0.4), rgba(255,255,255,0.45), rgba(78,168,255,0.15), rgba(78,168,255,0.0));
+  background-size: 200% 200%;
+  animation: var(--animate-shimmer);
+  mix-blend-mode: soft-light;
+}
+
+/* moving glare that sweeps across a card on hover */
+.card-glare::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.28) 50%, transparent 65%);
+  background-size: 250% 250%;
+  background-position: 120% 0;
+  transition: background-position 0.7s ease;
+  pointer-events: none;
+  border-radius: inherit;
+}
+.group:hover .card-glare::after { background-position: -40% 0; }
+
+/* =========================================================================
+   3D flip card primitives
+   ========================================================================= */
+.perspective-1200 { perspective: 1200px; }
+.preserve-3d { transform-style: preserve-3d; }
+.backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.rotate-y-180 { transform: rotateY(180deg); }
+
+/* =========================================================================
+   Glows & gem chrome
+   ========================================================================= */
+.text-glow-gold   { text-shadow: 0 0 18px rgba(255,210,74,0.55), 0 0 4px rgba(255,210,74,0.4); }
+.glow-gold        { box-shadow: 0 0 24px rgba(255,210,74,0.35), inset 0 0 12px rgba(255,210,74,0.12); }
+.glow-legendary   { box-shadow: 0 0 28px rgba(255,207,77,0.45); }
+.glow-epic        { box-shadow: 0 0 26px rgba(176,107,255,0.45); }
+.glow-rare        { box-shadow: 0 0 24px rgba(78,168,255,0.42); }
+.glow-common      { box-shadow: 0 0 20px rgba(123,216,143,0.35); }
+
+/* thin gold divider used across sections */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,210,74,0.6), transparent);
+}
+
+/* utility: hide scrollbar on filter rows */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+::selection { background: rgba(255,210,74,0.3); color: #fff; }
