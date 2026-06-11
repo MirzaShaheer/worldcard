@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
-import { SITE, TOKEN, NAV_LINKS } from "@/lib/config";
+import { SITE, TOKEN, NAV_LINKS, BASE_PATH } from "@/lib/config";
 
 /**
  * Sticky, glass-blurred top navigation for World Card.
@@ -50,12 +50,12 @@ export function Navbar() {
           className="group flex items-center gap-2.5"
           aria-label={`${SITE.name} home`}
         >
-          <span
-            className="grid h-9 w-9 place-items-center rounded-full border border-gold/40 bg-surface/70 text-gold transition-transform duration-300 group-hover:rotate-180 glow-gold"
-            aria-hidden
-          >
-            <span className="text-base leading-none text-glow-gold">◆</span>
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`${BASE_PATH}/logo.png`}
+            alt={`${SITE.name} logo`}
+            className="glow-gold h-9 w-9 shrink-0 rounded-full border border-gold/40 object-cover transition-transform duration-300 group-hover:scale-110 sm:h-10 sm:w-10"
+          />
           <span className="flex flex-col leading-none">
             <span className="font-display text-xl tracking-mega sm:text-2xl">
               <span className="text-gold text-glow-gold">WORLD</span>

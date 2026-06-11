@@ -40,7 +40,8 @@ export const metadata: Metadata = {
     description: SITE.tagline,
     images: [`${BASE_PATH}/logo.png`],
   },
-  icons: { icon: `${BASE_PATH}/favicon.ico` },
+  // Favicon + Apple touch icon come from app/icon.png and app/apple-icon.png
+  // (Next.js file conventions — auto-linked with the correct base path).
 };
 
 export const viewport: Viewport = {
