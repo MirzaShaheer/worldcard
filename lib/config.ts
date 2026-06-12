@@ -60,9 +60,40 @@ export const TOKENOMICS = {
 
 export const SOCIALS = {
   twitter: "https://x.com/worldcard",
-  telegram: "https://t.me/worldcard",
   dexscreener: "https://dexscreener.com",
   pumpfun: "https://pump.fun",
+} as const;
+
+/**
+ * "About the Cards" copy — plain-language explainer for what a World Card is
+ * (content) and why you'd collect it (use case). `lead` sits under the heading;
+ * each `features` entry is one tile in the About section grid.
+ */
+export const ABOUT_CARDS = {
+  lead:
+    "World Card turns the 48-nation World Cup into a holographic trading-card set. Every nation is one collectible card — flip the foil to reveal its captain, live win-odds, and rarity. Collect the pack, hold $WORLDCARD, and watch the buyback & burn make every card rarer over time.",
+  features: [
+    {
+      icon: "🌍",
+      title: "48 Nation Cards",
+      body: "One card for every team on the world's biggest stage. Tap or hover to flip the holo foil and reveal the nation, its captain, and odds to win.",
+    },
+    {
+      icon: "✦",
+      title: "Rarity by Odds",
+      body: "Each card's tier — Common to Legendary — is set by that nation's odds to lift the trophy. The favorites are the rarest pulls in the pack.",
+    },
+    {
+      icon: "⚡",
+      title: "Powered by $WORLDCARD",
+      body: "The whole set rides on a single Solana token. Hold $WORLDCARD to back the collection and fuel the 50% buyback & burn that thins the supply.",
+    },
+    {
+      icon: "🏆",
+      title: "Collect the World",
+      body: "Chase all four rarities and complete the full 48. As cards burn out of the pack, every nation you hold only gets scarcer.",
+    },
+  ],
 } as const;
 
 export const NAV_LINKS = [

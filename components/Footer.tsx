@@ -64,7 +64,6 @@ export function Footer() {
 
   const socials: { label: string; href: string; glyph: string }[] = [
     { label: "Twitter/X", href: SOCIALS.twitter, glyph: "𝕏" },
-    { label: "Telegram", href: SOCIALS.telegram, glyph: "✈" },
     { label: "Dexscreener", href: SOCIALS.dexscreener, glyph: "📈" },
     { label: "pump.fun", href: SOCIALS.pumpfun, glyph: "🚀" },
   ];

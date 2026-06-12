@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { TickerBar } from "@/components/TickerBar";
 import { Hero } from "@/components/Hero";
 import { Tokenomics } from "@/components/Tokenomics";
+import { AboutCards } from "@/components/AboutCards";
 import { CardGallery } from "@/components/CardGallery";
 import { HowToBuy } from "@/components/HowToBuy";
 import { Roadmap } from "@/components/Roadmap";
@@ -16,6 +17,7 @@ export default function Home() {
       <main>
         <Hero />
         <Tokenomics />
+        <AboutCards />
 
         {/* Homepage shows a curated preview of the pack; full set lives at /cards */}
         <CardGallery showFilters={false} limit={12} />
