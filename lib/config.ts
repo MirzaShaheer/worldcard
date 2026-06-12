@@ -59,7 +59,7 @@ export const TOKENOMICS = {
 } as const;
 
 export const SOCIALS = {
-  twitter: "https://x.com/worldcard",
+  twitter: "https://x.com/worldcardcoin",
   dexscreener: "https://dexscreener.com",
   pumpfun: "https://pump.fun",
 } as const;
